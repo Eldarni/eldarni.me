@@ -1,0 +1,22 @@
+
+//variables
+@import 'partials/variables';
+
+//mixins
+@import 'mixins/flex';
+@import 'mixins/font';
+@import 'mixins/position';
+@import 'mixins/pseudo';
+@import 'mixins/truncate';
+
+//layout
+@import 'partials/global';
+@import 'partials/header';
+@import 'partials/footer';
+
+//layouts
+@import 'partials/article';
+
+//components
+@import 'partials/links';
+@import 'partials/blockquote';

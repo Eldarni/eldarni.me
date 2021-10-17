@@ -1,0 +1,15 @@
+
+//
+blockquote {
+
+    //
+    @include font($family: var(--ff-heading), $size: var(--font-size-large), $weight: 600, $line-height: 1.2);
+
+    //
+    text-align: center;
+
+    //
+    &::before { content: open-quote;  }
+    &::after  { content: close-quote; }
+
+}

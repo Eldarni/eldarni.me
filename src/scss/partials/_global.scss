@@ -1,0 +1,57 @@
+
+//align the box-sizing across clients
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+//remove the default margin/padding on some of the baseline elements
+body, h1, h2, h3, p, blockquote {
+    margin: 0;
+    padding: 0;
+}
+
+//
+html, body {
+    height: 100%;
+}
+
+//
+body {
+
+	//
+	background: var(--colour-background);
+
+    //@todo - this isn't as useful when setting ALL THE PROPERTIES
+    @include font($family: var(--ff-body), $weight: 400, $colour: var(--colour-foreground), $size: var(--font-size-medium), $line-height: calc(var(--font-size-medium) * 1.6));
+
+    //
+    @include flex($direction: column, $gap: 3rem);
+
+}
+
+//add a wrapper to offset the main content and header away from the top and left sides of the viewport
+.site-wrapper {
+
+    //
+    max-width: 70vw;
+    margin-top: 2vh;
+    margin-left: 10vh;
+
+    //
+    flex: 0 1 100%;
+
+}
+
+.site-content {
+
+    //
+    @include flex($direction: column, $gap: 1rem);
+
+    //
+    h1 {
+        @include font($family: var(--ff-heading), $size: clamp(3rem, 12vw + 1rem, 6rem), $weight: 600, $line-height: 1);
+        text-transform: uppercase;
+
+    }
+
+}

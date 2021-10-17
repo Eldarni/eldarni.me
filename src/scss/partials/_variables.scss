@@ -1,0 +1,40 @@
+
+//lets define variable using css custom properties where possible
+:root {
+
+    //which fonts
+    --ff-body: "Heebo", sans-serif;
+    --ff-heading: "Oswald", sans-serif;
+
+    //font sizes
+    --font-size-large:  36px;
+    --font-size-medium: 28px;
+    --font-size-small:  14px;
+
+    //what colours
+    --colour-background       : #fffefe;
+    --colour-foreground       : #050000;
+
+    --colour-background-alt   : #26272b;
+    --colour-foreground-alt   : #737373;
+
+    --colour-accent           : #ea0000;
+    --colour-accent-alt       : #ff1e00;
+
+}
+
+//
+@media (max-width: 40em) {
+    :root {
+        --font-size-large: calc(var(--font-size-large) * 2);
+        --font-size-medium: calc(var(--font-size-medium) * 2);
+    }
+}
+
+//Heebo - SIL Open Font License, 1.1 - Copyright 2014 The Heebo Project Authors (https://github.com/OdedEzer/heebo) - conversion to woff/woff2 for self-hosting via https://google-webfonts-helper.herokuapp.com/fonts
+@font-face { font-family: 'Heebo'; font-style: normal; font-weight: 400; src: local(''), url('/fonts/heebo-v12-latin-regular.woff2') format('woff2'), url('/fonts/heebo-v12-latin-regular.woff') format('woff'); }
+@font-face { font-family: 'Heebo'; font-style: normal; font-weight: 600; src: local(''), url('/fonts/heebo-v12-latin-600.woff2') format('woff2'), url('/fonts/heebo-v12-latin-600.woff') format('woff'); }
+
+//Oswald - SIL Open Font License, 1.1 - Copyright 2016 The Oswald Project Authors (https://github.com/googlefonts/OswaldFont) - conversion to woff/woff2 for self-hosting via https://google-webfonts-helper.herokuapp.com/fonts
+@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local(''), url('/fonts/oswald-v40-latin-regular.woff2') format('woff2'), url('/fonts/oswald-v40-latin-regular.woff') format('woff'); }
+@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 600; src: local(''), url('/fonts/oswald-v40-latin-600.woff2') format('woff2'), url('/fonts/oswald-v40-latin-600.woff') format('woff'); }

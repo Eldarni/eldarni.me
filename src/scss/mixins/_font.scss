@@ -1,0 +1,9 @@
+
+//
+@mixin font($size: false, $family: false, $colour: false, $weight: false, $line-height: false) {
+    @if $size { font-size: $size; }
+    @if $family { font-family: $family; }
+    @if $colour { color: $colour; }
+    @if $weight { font-weight: $weight; }
+    @if $line-height { line-height: $line-height; }
+}

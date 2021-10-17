@@ -1,0 +1,32 @@
+
+//
+.site-header {
+
+    //
+    @include flex($direction: row, $align: center, $justify: flex-end);
+    border-bottom: 2px solid var(--colour-foreground-alt);
+
+    //
+    margin-bottom: 1em;
+
+    //
+    p { 
+        flex: 0 1 100%;
+    }
+
+    //
+    nav {
+
+        //
+        @include flex($direction: row, $align: center, $gap: 1em);
+        padding: 0em 0.5em;
+
+        //
+        a {
+            @include font($size: var(--font-size-small), $colour: var(--colour-body-text));
+            &:hover { @include font($colour: var(--colour-foreground-alt)); }
+        }
+
+    }
+
+}

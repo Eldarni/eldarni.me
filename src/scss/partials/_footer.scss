@@ -1,0 +1,31 @@
+.site-footer {
+
+    //
+    padding: 0em 2em;
+    
+    //
+    background: var(--colour-background-alt);
+    @include font($size: var(--font-size-small), $colour: var(--colour-foreground-alt));
+
+    //
+    @include flex($direction: row, $align: center);
+
+    //
+    p { 
+        flex: 0 1 100%;
+    }
+
+    //
+    nav {
+
+        //
+        @include flex($direction: row, $align: center, $gap: 1em);
+
+        //
+        a {
+            @include font($colour: var(--colour-foreground-alt));
+        }
+
+    }
+
+}

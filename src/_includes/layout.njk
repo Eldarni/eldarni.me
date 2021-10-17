@@ -4,9 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    <title>{{ title }} &bull; eldarni.me</title>
+
+    <link rel="canonical" href="https://www.eldarni.me{{ page.url }}">
+
+    <style type="text/css">
+        {% include "css/main.css" ignore missing %} {# we should include this rather than inline it! #}
+    </style>
+
 </head>
 <body>
-    {{ content | safe }}
+
+    <div class="site-wrapper">
+
+        <header class="site-header">
+            <p>eldarni.me</p>
+            <nav>
+                <a href="/" title="Home">Home</a>
+                <a href="/archive/" title="Archive">Archive</a>
+                <a href="/about/" title="About">About</a>
+            </nav>
+        </header>
+
+        <main class="site-content">
+            <h1>{{ title }}</h1>
+            {{ content|safe }}
+        </main>
+
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy;2021 &bull; Richard Smith &bull; Please remember when reading, past me was an idiot.</p>
+        <nav>
+            <a href="/" title="Home">Home</a>
+            <a href="/archive/" title="Archive">Archive</a>
+            <a href="/about/" title="About">About</a>
+        </nav>
+    </footer>
+
 </body>
 </html>
