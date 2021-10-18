@@ -1,0 +1,71 @@
+
+//
+section.archive {
+ 
+    //quick string repeat function to help out with the toc dots
+    @function repeat($string, $times) {
+
+        //
+        $output: '';
+
+        //
+        @for $i from 1 through $times {
+            $output: $output + $string;
+        }
+
+        //
+        @return $output;
+
+    }
+
+    //
+    @include flex($direction: column, $gap: 1rem);
+    font-size: calc(var(--font-size-small) * 1.5);
+
+    //
+    a {
+
+        //
+        display: grid;
+        grid-template-columns: auto max-content;
+        grid-template-areas: "title time";
+        
+        //
+        align-items: end;
+
+        //
+        gap: 0.5em;
+
+        color: var(--colour-foreground);
+        
+    }
+
+    //display the post title
+    h2 {
+
+        //
+        grid-area: title;
+        position: relative;
+        overflow: hidden;
+        font-weight: normal;
+        
+        //
+        @include after($content: repeat(' .', 80), $display: inline) {
+            padding-left: 0.25ch;
+            text-align: right;
+            white-space: normal;
+            color: var(--colour-muted);
+        }
+        
+    }
+
+    //display the post date
+    time {
+        grid-area: time;
+        font-family: var(--ff-heading);
+        height: 2.1em;
+    }
+
+
+}
+

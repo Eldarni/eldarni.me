@@ -1,7 +1,14 @@
 ---
-layout: layout.njk
+layout: layout
 title: Archive
 ---
-{% for post in collections.post %}
-    <p><a href="{{ post.url }}">{{ post.data.title }}</a></p>
-{% endfor %}
+<section class="archive">
+
+    {% for post in collections.post|reverse %}
+        <a class="alt" href="{{ post.url }}" title="{{ post.data.title }}">
+            <h2>{{ post.data.title }}</h2>
+            <time datetime="{{ post.date|timestamp }}">{{ post.date|date }}</time>
+        </a>
+    {% endfor %}
+
+</section>
