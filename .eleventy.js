@@ -13,6 +13,21 @@ module.exports = function(eleventyConfig) {
     //copy over any images
     eleventyConfig.addPassthroughCopy('src/images');
 
+    //
+    eleventyConfig.addFilter('timestamp', (date) => {
+        return String(date.toISOString());
+    });
+
+    //
+    eleventyConfig.addFilter('date', (date) => {
+        return `${String(date.getFullYear())}-${String(date.getMonth()).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    });
+
+    //
+    eleventyConfig.addFilter('time', (date) => {
+        return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+    });
+
     //use an after build event to create a copy of the latest post to be used as the homepage
     eleventyConfig.on('afterBuild', () => {
 
