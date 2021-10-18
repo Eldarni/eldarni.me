@@ -1,7 +1,39 @@
 
 //
-@mixin pseudo($display: block, $pos: absolute, $content: ''){
-    content: $content;
+@mixin pseudo($display: block, $position: absolute, $content: '', $inset: null, $top: null, $right: null, $bottom: null, $left: null) {
+
+    //
     display: $display;
-    position: $pos;
+
+    //
+    position: $position;
+
+    //
+    content: $content;
+
+    //
+    @if $inset  != null { inset:  $inset;  }
+
+    //
+    @if $top    != null { top:    $top;    }
+    @if $right  != null { right:  $right;  }
+    @if $bottom != null { bottom: $bottom; }
+    @if $left   != null { left:   $left;   }
+
+}
+
+//
+@mixin before($display: block, $position: absolute, $content: '', $inset: null, $top: null, $right: null, $bottom: null, $left: null) {
+    &::before {
+        @include pseudo($display: $display, $position: $position, $content: $content, $inset: $inset, $top: $top, $right: $right, $bottom: $bottom, $left: $left);
+        @content;
+    }
+}
+
+//
+@mixin after($display: block, $position: absolute, $content: '', $inset: null, $top: null, $right: null, $bottom: null, $left: null) {
+    &::after {
+        @include pseudo($display: $display, $position: $position, $content: $content, $inset: $inset, $top: $top, $right: $right, $bottom: $bottom, $left: $left);
+        @content;
+    }
 }
