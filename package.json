@@ -1,7 +1,7 @@
 {
-  "name": "blog",
+  "name": "eldarni.me",
   "version": "1.0.0",
-  "description": "Blog",
+  "description": "eldarni.me",
   "main": "index.js",
   "scripts": {
     "sass": "sass --style=compressed src/scss/main.scss src/_includes/css/main.css",
@@ -12,13 +12,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Eldarni/Blog.git"
+    "url": "git+https://github.com/Eldarni/eldarni.me.git"
   },
   "author": "Eldarni",
   "bugs": {
-    "url": "https://github.com/Eldarni/Blog/issues"
+    "url": "https://github.com/Eldarni/eldarni.me/issues"
   },
-  "homepage": "https://github.com/Eldarni/Blog#readme",
+  "homepage": "https://github.com/Eldarni/eldarni.me#readme",
   "dependencies": {
     "@11ty/eleventy": "^1.0.0-beta.2",
     "glob": "^7.2.0",
