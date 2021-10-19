@@ -12,18 +12,8 @@ article {
 
     }
 
-    //use a 2 column layout where possible for the main article content
+    //
     main {
-
-        //
-        columns: 2 30ch;
-        widows: 3;
-
-        //
-        gap: 4rem;
-
-        max-width: 100ch;
-    
 
         //add a gap between the elements in the article - I can't use flex here as the columns will mess this up
         > * + * {
