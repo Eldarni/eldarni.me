@@ -4,6 +4,9 @@ const fs = require('fs');
 const glob = require('glob');
 const matter = require('gray-matter');
 
+//plugins
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+
 //
 module.exports = function(eleventyConfig) {
 
@@ -27,6 +30,9 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addFilter('time', (date) => {
         return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
     });
+
+    //
+    eleventyConfig.addPlugin(syntaxHighlight);
 
     //use an after build event to create a copy of the latest post to be used as the homepage
     eleventyConfig.on('afterBuild', () => {

@@ -1,0 +1,45 @@
+
+//
+code[class*="language-"], pre[class*="language-"] {
+    color: #f8f8f2;
+    background: none;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+    font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 18px;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 0.8em;
+}
+
+//
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+    border-radius: 0.3em;
+}
+
+//
+:not(pre) > code[class*="language-"], pre[class*="language-"] {
+    background: #272822;
+}
+
+//
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+//
+.token.comment     { color: #75715E; }
+.token.punctuation { color: #f8f8f2; }
+.token.constant    { color: #f92672; }
+.token.boolean     { color: #ae81ff; }
+.token.number      { color: #ae81ff; }
+.token.string      { color: #FFE792; }
+.token.operator    { color: #F92672; }
+.token.keyword     { color: #66d9ef; }
