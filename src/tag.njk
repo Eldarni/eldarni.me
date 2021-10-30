@@ -1,0 +1,20 @@
+---
+layout: layout
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+  filter:
+    - post
+permalink: /tags/{{ tag }}/
+---
+<section class="archive">
+    <h1>Tagged “{{ tag }}”</h1>
+    {% set taglist = collections[ tag ] %}
+    {% for post in taglist | reverse %}
+        <a class="alt" href="{{ post.url }}" title="{{ post.data.title }}">
+            <h2>{{ post.data.title }}</h2>
+            <time datetime="{{ post.date|timestamp }}">{{ post.date|date }}</time>
+        </a>
+    {% endfor %}
+</section>

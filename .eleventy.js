@@ -17,6 +17,11 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy('src/images');
 
     //
+    eleventyConfig.addFilter('filterTags', (tags) => {
+        return tags.filter(tag => tag != 'post');
+    });
+
+    //
     eleventyConfig.addFilter('timestamp', (date) => {
         return String(date.toISOString());
     });

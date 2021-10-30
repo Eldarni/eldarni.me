@@ -40,4 +40,20 @@ article {
 
     }
 
+    //
+    .post-tags a {
+
+        //
+        @include font($size: 0.8em, $colour: var(--colour-background-alt));
+        &:hover {
+            color: var(--colour-foreground-alt);
+        }
+
+        //
+        span {
+            color: var(--colour-foreground-alt);
+        }
+
+    }
+
 }

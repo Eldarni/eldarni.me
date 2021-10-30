@@ -6,4 +6,11 @@ layout: layout
     <main>
         {{ content|safe }}
     </main>
+    <footer>
+        <div class="post-tags">
+            {% for tag in tags|filterTags %}
+                <a class="alt" href="/tags/{{ tag }}/"><span>#</span>{{ tag }}</a>
+            {% endfor %}
+        </div>
+    </footer>
 </article>
