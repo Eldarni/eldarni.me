@@ -1,0 +1,107 @@
+---
+title: Adding the latest post to your homepage
+subtitle: Do you wanna build a blog?
+tags:
+    - eleventy
+    - javascript
+date: 2021-10-30 15:00:00
+---
+
+<p><span>As your reading this, I think the answer is obvious.</span> But looking at the sea of curated homepages with "about me's" or index pages showing of the latest 10 posts with artistically chosen images I wanted something different (read: easier) - I wanted the very last thing I posted slap bang on the font of the site - so you can't miss the last thing that was posted (even if it was three years ago).</p>
+<p>Let's get this out of the way - this site is built ontop of <a href="https://www.11ty.dev/">Eleventy</a> and <a href="https://www.netlify.com/">Netlify</a>, so down the rabbit hole of figuring this out I go.</p>
+
+<p>My first idea is too get the latest post from the relevent collection, and just render it out on the <code>index.njk</code> - something like:</p>
+
+{% highlight "twig" %}
+    {% raw %}
+{% set latestPost = (collections.post|reverse)[0] %}
+<article>
+    <h1>{{ latestPost.data.title }}</h1>
+    {{ latestPost.templateContent|safe }}
+</article>
+    {% endraw %}
+{%- endhighlight %}
+
+<p>Works? - kinda, This gets the post, but by the time we are rendering the page we can't update the front matter (or anything about the <a href="https://www.11ty.dev/docs/data-cascade/">data cascade</a>), so things like the <code>&lt;title&gt;</code> won't update, you will also get a SEO penalty for duplicate content, as you can't update the canonical link for the same reason.</p>
+<p>Just to rub salt into this, nunjunks does not support passing data into an include (so you can't reuse the "post" layout) - though you can do this with by using a macro and different templating systems might give you some different options.</p>
+
+<h2>The solution</h2>
+<p>So, lets get onto how I did this - let's just make a copy of the latest post, and rename it to <code>index.html</code> after the site is built, easy.</p>
+<p>Eleventy comes with a <code>afterBuild</code> event that allows us to run some logic after it's done, but (as of the time of writing this post), does not have access to the collections object.</p>
+<p>The reason I want the collection data, is that allows me to identify the latest post (see above), as I can't trust the file created times, as all these files get built each time you deploy the site. So let's break down the different steps:</p>
+<ol>
+    <li>Identify the templates that contain our posts + the date</li>
+    <li>Open each file, parse the front matter to get the post date</li>
+    <li>Use this to identify, and then make a copy of the latest post, moving it to the root and calling it "index.html"</li>
+</ol>
+<p>Okay - step one can be done by using <code>fs</code>, and to make it a bit easier lets use <code>glob</code> to get a list of our files.</p>
+
+{% highlight "js" %}
+const fs = require('fs');
+const glob = require('glob');
+
+module.exports = function(eleventyConfig) {
+    eleventyConfig.on('afterBuild', () => {
+
+        const posts = glob.sync('./src/posts/**/*.njk').reduce((posts, post) => {
+            return [ ...posts, { 'filename' : post }];
+        }, []);
+
+    });
+});
+{% endhighlight %}
+
+<p>We now have a array of posts, but in order to sort the list by date, we need the date, so lets use <code>gray-matter</code> (this is what Eleventy itself uses) to parse the front matter, then we can apply the sort, and pop the first item off the array to get the latest post.</p>
+
+{% highlight "js" %}
+const fs = require('fs');
+const glob = require('glob');
+const matter = require('gray-matter');
+
+module.exports = function(eleventyConfig) {
+    eleventyConfig.on('afterBuild', () => {
+
+        const posts = glob.sync('./src/posts/**/*.njk').reduce((posts, post) => {
+            const file = matter(fs.readFileSync(post));
+            return [ ...posts, { 'filename' : post, 'date' : new Date(file.data.date) }];
+        }, []);
+
+        const latestPost = posts.sort((a, b) => b.date - a.date).at(0);
+
+    });
+});
+{% endhighlight %}
+
+<p>Almost there, to finish, we need to figure out the name of the resulting html file in the output directory, then make a copy of it in the root of the output directory.</p>
+
+{% highlight "js" %}
+const fs = require('fs');
+const glob = require('glob');
+const matter = require('gray-matter');
+
+module.exports = function(eleventyConfig) {
+    eleventyConfig.on('afterBuild', () => {
+
+        const posts = glob.sync('./src/posts/**/*.njk').reduce((posts, post) => {
+            const file = matter(fs.readFileSync(post));
+            return [ ...posts, { 'filename' : post, 'date' : new Date(file.data.date) }];
+        }, []);
+
+        const latestPost = posts.sort((a, b) => b.date - a.date).at(0);
+
+        const latestPostArtifactFilename = latestPost.filename.replace('./src/', './public/').replace('.njk', '/index.html');
+        fs.copyFile(latestPostArtifactFilename, './public/index.html', (err) => {
+            if (err) throw err;
+        });
+
+    });
+});
+{% endhighlight %}
+
+<p>The examples are not necessarily something you can copy/paste directly - these are based on my folder structure and needs, but if your only going to copy paste things you found on the internet, you can go to stack overflow :).</p>
+<p>Some gotchas if your looking at this, first - the "front matter" is incomplete - this does not account for any other parts of the data cascade, you must add a canonical link to every post, else you will get hit by the duplicated content stick. The page is also an exact copy of the origional page - if you want to tweak it then that will need to be done after build via some manipulation of the final output.</p>
+
+<h2>Conclusion</h2>
+
+<p>Am I fairly happy with the solution it does what I want it to do for now and anything that I need in the future I could probaly do with some DOM manipulation after the build process is completed.</p>
+<p>What would be nice? Access to the collections object from inside <code>afterBuild</code> - maybe even access to the collections object in the companion event <code>beforeBuild</code> - with the ability to set some "last second" values into the data cascade as global config data.</p>
