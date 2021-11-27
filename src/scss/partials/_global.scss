@@ -25,6 +25,9 @@ body {
     @include font($family: var(--ff-body), $weight: 400, $colour: var(--colour-foreground), $size: var(--font-size-medium), $line-height: calc(var(--font-size-medium) * 1.6));
 
     //
+    letter-spacing: 0.03em;
+
+    //
     @include flex($direction: column, $gap: 3rem);
 
 }

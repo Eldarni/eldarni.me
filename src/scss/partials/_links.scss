@@ -1,6 +1,7 @@
 
 //add generic styling to a tags
 a {
+    cursor: pointer;
 	color: var(--colour-accent);
 	text-decoration: none;
 	&:hover { color: var(--colour-accent-alt); }
