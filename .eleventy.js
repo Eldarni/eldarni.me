@@ -8,6 +8,9 @@ const matter = require('gray-matter');
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 //
+const currentTime = new Date();
+
+//
 module.exports = function(eleventyConfig) {
 
     //copy over any font files
@@ -17,6 +20,9 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy('src/images');
 
     //
+    eleventyConfig.addGlobalData('currentTime', currentTime);
+
+    //
     eleventyConfig.addFilter('filterTags', (tags) => {
         return tags.filter(tag => tag != 'post');
     });
@@ -24,6 +30,11 @@ module.exports = function(eleventyConfig) {
     //
     eleventyConfig.addFilter('timestamp', (date) => {
         return String(date.toISOString());
+    });
+
+    //
+    eleventyConfig.addFilter('year', (date) => {
+        return String(date.getFullYear());
     });
 
     //
