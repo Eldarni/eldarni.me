@@ -1,7 +1,8 @@
 
-//align the box-sizing across clients
+//align the box-sizing across clients and make scrolling smooooth
 *, *::before, *::after {
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 //remove the default margin/padding on some of the baseline elements
