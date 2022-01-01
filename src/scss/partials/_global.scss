@@ -32,6 +32,37 @@ body {
 
 }
 
+//add a "skip to content" link for screen readers and keyboard warriors
+a[href="#main"] {
+    
+    //
+    @include absolute($top: 0.5em, $left: 12vh);
+    position: absolute !important;
+
+    //
+    outline: 10px solid var(--colour-background);
+    border: 2px solid var(--colour-accent);
+    background-color: var(--colour-background);
+        
+    //
+    border-radius: 0.5rem;
+
+    //
+    padding: 0.5rem 1rem;
+    transform: translateY(-130%);
+
+    //show it when it is in focus
+    &:focus {
+        transform: translateY(0%);
+    }
+
+    //only animate if the user does express a reduced motion preference
+    @media screen and (prefers-reduced-motion: no-preference) {
+        transition: transform 0.3s;
+    }
+    
+}
+
 //add a wrapper to offset the main content and header away from the top and left sides of the viewport
 .site-wrapper {
 

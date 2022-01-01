@@ -14,6 +14,8 @@
 </head>
 <body>
 
+    <a href="#main">skip to content</a>
+
     <div class="site-wrapper">
 
         <header class="site-header">
@@ -25,7 +27,7 @@
             </nav>
         </header>
 
-        <main class="site-content">
+        <main id="main" class="site-content">
             <h1>{{ title }}</h1>
             {{ content|safe }}
         </main>
