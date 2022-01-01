@@ -1,6 +1,6 @@
 
 //lets define variable using css custom properties where possible
-:root {
+body {
 
     //which fonts
     --ff-body: "Heebo", sans-serif;
@@ -26,7 +26,7 @@
 
 //
 @media (max-width: 40em) {
-    :root {
+    body {
         --font-size-large: calc(var(--font-size-large) * 2);
         --font-size-medium: calc(var(--font-size-medium) * 2);
     }
