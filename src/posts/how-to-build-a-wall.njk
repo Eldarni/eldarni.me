@@ -1,0 +1,52 @@
+---
+title: How to build a wall
+subtitle: "Using grid-template-rows: masonry today"
+tags:
+    - css
+    - javascript
+date: 2021-12-30 20:00:00
+---
+
+<p><span>CSS Grid is great</span>, but an entire page covered in little boxes (on the hillside) - that all look the same can be a bit much. I was asked to setup a new feature page on our client's site, to advertise some services, each service should be its own little box, with a space for a label, logo and description - and there is my first issue, these descriptions are all (probably) going to be of different lengths, some of the logos may be taller etc, so if I was going for a traditional "fixed" grid layout, each box would need to be as big largest box on the row (assuming we use <code>grid-auto-rows: max-content</code>) - leaving the other boxes with some empty space.</p>
+<p>No problem I thought, I can use <code>grid-template-rows: masonry</code> - that's part of the level 3 grid spec that I have been using for years.... oh - looks like it's supported in one browser and only under a feature flag. Great.</p>
+<p>This article is not going to cover the different options to implement a masonry layout today, there are enough of those about - nor do I necessarily suggest using the solution I did, but to outline my own approach to finding a solution, applying my own thought process to it and updating it to take advantage of new features in our browsers.</p>
+<p>The solution I settled on is based on an article by Andy Barefoot - <a href="https://medium.com/@andybarefoot/a-masonry-style-layout-using-css-grid-8c663d355ebb">Masonry style layout with CSS Grid</a> this was a "good enough" approach to the problem, it didn't do everything, but met the requirements I wanted. If you want a tl:dr - it uses <code>grid-auto-rows</code> to make many small rows, then uses javascript to calculate how many rows each cell would span and sets the <code>span</code> property to suit.</p>
+
+<h2>Making it my own</h2>
+<p>Once I had the example from the article running I looked to see what could be done better, what didn't work for my needs etc. Three things jumped out at me:</p>
+
+<h3>Backwards Compatibility</h3>
+<p>To apply the height calculation, we need the cell to not be affected by the grid layout (as this will fix the elements size) - to do this the Andy suggests to wrap each cell in a div in the source, but this wouldn't work for us - as this will affect both the fallback fixed grid layout but also the the browser implemented version when we get it - but we can get javascript to wrap each of our  wrap it in a div once we decide that we are going down the polyfill route - so lets get javascript to do this.</p>
+{% highlight "js" %}
+Array.from(document.querySelector('.masonry-grid').children).forEach((gridItem) => {
+    const container = document.createElement('div');
+    Array.from(gridItem.children).forEach((element) => {
+        container.appendChild(element);
+    });
+    gridItem.appendChild(container);
+});
+{% endhighlight %}
+
+<h3>Forwards Compatibility</h3>
+<p>Eventually we will see broader support for the masonry spec and we will no longer need to use polyfills/third party libraries, so I want my version to "go away" once this happens, this is done using feature detection for the masonry, this is done by using the <code>@supports (grid-template-rows: masonry)</code> in css and <code>CSS.supports('grid-template-rows', 'masonry')</code> in javascript, if these pass then my css and js will not run - letting the browser do it's thing.</p>
+<p>I also need to have certain css apply only when my version is active, to do this I set a attribute to the grid, and in css apply <code>grid-auto-rows: 1rem</code> based on the existence of that attribute (you could use a class just as easily). The handy thing here, is with the @supports query and the attribute - I have a complete fallback to a standard fixed grid if the user has javascript disabled and the native masonry layout is not supported.</p>
+
+<h3>Images</h3>
+<p>In the article Andy mentions the issue of images, these will not have loaded by the time the grid is first rendered, so as the images load in everything will be the wrong size, his solution was a external library to handle this, but nowadays we have some additional tools to hand - namely the ResizeObserver - as the image loads, it will cause a resize on the cell, and so we can act on that and redo our size calculation. This has a secondary benefit of also triggering when the cells change size for a different reason - e.g. browser resize or the content changes - win.</p>
+
+{% highlight "js" %}
+const resizeObserver = new ResizeObserver((entries) => {
+    for (let entry of entries) {
+        resizeGridItem(entry.target.closest('.masonry-item'));
+    }
+});
+
+Array.from(document.querySelector('.masonry-grid').children).forEach((gridItem) => {
+    resizeObserver.observe(gridItem.children[0]);
+});
+{% endhighlight %}
+
+<h2>Conclusion</h2>
+<p>There are a couple of "less than ideal" things with this solution, even with the rows only being 1rem tall, there is still an element of "snapping" on the boxes, with them being the same height (though this may be preferable to having 2 boxes only a couple of pixels different). The logic also does not reflow the boxes, so everything still appears in the same column it was in - this does not follow the native spec and can leave a really jagged edge - this is something that could be resolved through dynamically calculating the order property.</p>
+<p>Andy's article was written in 2017 - about the time @supports started landing and a good year before ResizeObserver landed - so it makes sense the author did not take advantage of these features - but we are able to now, so it makes sense to take advantage of them. Once the browsers all support the native masonry spec, we will be able to drop the polyfill, but until then - we have achieved our desired functionality and - importantly - have set it up to be graceful - both when the our logic is not running and when it's no longer needed.</p>
+<p>But, the point of this post is to say: using Google/Stack Overflow/whatever to find an example of something should not be seen as the end of the process, make sure you understand the code you are delivering to your client (even if that is yourself) and ask questions - rather than looking for a solution that fits your exact needs - can you find something that is 50% there - and add the remaining 50% yourself? Are the methods being used still relevant today? Are there new features that I can use? There are times where an entire "fits everyone" library is needed, but sometimes a little dab will do.</p>
