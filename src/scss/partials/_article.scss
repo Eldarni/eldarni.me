@@ -17,6 +17,11 @@ article {
         //
         @include flex($direction: column, $gap: 1.5rem);
 
+        //style the headings
+        h2 { @include font($size: 1.2em, $weight: 600); }
+        h3 { @include font($size: 1.0em, $weight: 600); }
+        h4 { @include font($size: 0.8em, $weight: 600); }
+
         //add some drop cap styling to the very first letter
         > p:first-of-type::first-letter { //goes funny on mobile
 
