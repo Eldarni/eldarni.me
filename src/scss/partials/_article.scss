@@ -40,6 +40,13 @@ article {
             font-weight: 600;
         }
 
+        //style the "inline" code tags
+        code:not([class*="language-"]) {
+            font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+            color: var(--colour-foreground-alt);
+            font-size: 0.8em;
+        }
+
     }
 
     //
