@@ -50,7 +50,7 @@ section.archive {
         font-weight: normal;
         
         //
-        @include after($content: repeat(' .', 100), $display: inline) {
+        @include after($content: repeat(' .', 180), $display: inline) {
             padding-left: 0.25ch;
             text-align: right;
             white-space: normal;
