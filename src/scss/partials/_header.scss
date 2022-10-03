@@ -23,8 +23,40 @@
 
         //
         a {
+
+            //
+            position: relative;
+
+            //
             @include font($size: var(--font-size-small), $colour: var(--colour-body-text));
-            &:hover { @include font($colour: var(--colour-foreground-alt)); }
+
+            //
+            @include before($bottom: 12px, $right: 0) {
+
+                //
+                width: 0;
+                height: 2px;
+
+                //
+                background-color: var(--colour-accent-alt);
+                transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+
+            }
+
+            //
+            &:hover {
+
+                //
+                @include font($colour: var(--colour-foreground-alt));
+
+                //
+                &::before{
+                    left: 0;
+                    right: auto;
+                    width: 100%;
+                }
+            }
+
         }
 
     }
