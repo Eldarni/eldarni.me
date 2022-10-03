@@ -6,6 +6,7 @@ const matter = require('gray-matter');
 
 //plugins
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const timeToRead      = require('eleventy-plugin-time-to-read');
 
 //
 const currentTime = new Date();
@@ -18,6 +19,9 @@ module.exports = function(eleventyConfig) {
 
     //copy over any images
     eleventyConfig.addPassthroughCopy('src/images');
+
+    //copy over any icons
+    eleventyConfig.addPassthroughCopy('src/icons');
 
     //
     eleventyConfig.addGlobalData('currentTime', currentTime);
@@ -49,6 +53,9 @@ module.exports = function(eleventyConfig) {
 
     //
     eleventyConfig.addPlugin(syntaxHighlight);
+
+    //
+    eleventyConfig.addPlugin(timeToRead);
 
     //use an after build event to create a copy of the latest post to be used as the homepage
     eleventyConfig.on('afterBuild', () => {

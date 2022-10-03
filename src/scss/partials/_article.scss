@@ -5,12 +5,6 @@ article {
     //
     @include flex($direction: column, $gap: 2rem);
 
-    //subtitle/rider
-    > p {
-        @include font($size: var(--font-size-large), $line-height: calc(var(--font-size-large) * 1.3));
-        max-width: 35ch;
-    }
-
     //
     main {
 

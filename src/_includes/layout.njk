@@ -29,6 +29,12 @@
 
         <main id="main" class="site-content">
             <h1>{{ title }}</h1>
+            {% if layout == 'post' %}
+                <p class="post-subtitle">{{ subtitle }}</p>
+                <p class="post-time-to-read">
+                    <span class="icon" data-icon="time"></span> <span>{{ content|timeToRead }}</span>
+                </p>
+            {% endif %}
             {{ content|safe }}
         </main>
 
