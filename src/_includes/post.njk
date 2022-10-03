@@ -11,5 +11,6 @@ layout: layout
                 <a class="alt" href="/tags/{{ tag }}/"><span>#</span>{{ tag }}</a>
             {% endfor %}
         </div>
+        <p class="post-info"><time datetime="{{ date|timestamp }}">Posted on the {{ date|date }} at {{ date|time }}</time> | <a href="https://www.eldarni.me{{ page.url }}" title="permalink">https://www.eldarni.me{{ page.url }}</a></p>
     </footer>
 </article>
