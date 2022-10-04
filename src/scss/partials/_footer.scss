@@ -24,6 +24,7 @@
         //
         a {
             @include font($colour: var(--colour-foreground-alt));
+            &:hover { @include font($colour: var(--colour-accent)); }
         }
 
     }
