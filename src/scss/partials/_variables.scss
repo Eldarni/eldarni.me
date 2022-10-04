@@ -1,4 +1,21 @@
 
+//primary brand colour - use sparingly for accents etc
+$colour-accent     : #bf2b18;
+$colour-accent-alt : #e32636;
+
+//define the main text and background colours with alternates
+$colour-lm-foreground       : #050000;
+$colour-lm-foreground-alt   : #737373;
+$colour-lm-background       : #ffffff;
+$colour-lm-background-alt   : #26272b;
+
+//now for darkmode versions
+$colour-dm-foreground       : #dddddd;
+$colour-dm-foreground-alt   : #9a9eae;
+$colour-dm-background       : #050000;
+$colour-dm-background-alt   : #565861;
+
+
 //lets define variable using css custom properties where possible
 body {
 
@@ -10,17 +27,6 @@ body {
     --font-size-large:  36px;
     --font-size-medium: 28px;
     --font-size-small:  14px;
-
-    //what colours
-    --colour-background       : #fffefe;
-    --colour-foreground       : #050000;
-    --colour-muted            : #cacaca;
-
-    --colour-background-alt   : #26272b;
-    --colour-foreground-alt   : #737373;
-
-    --colour-accent           : #ea0000;
-    --colour-accent-alt       : #ff1e00;
 
 }
 

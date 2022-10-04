@@ -31,11 +31,37 @@ body {
     //
     @include flex($direction: column, $gap: 3rem);
 
+    //primary brand colour - use sparingly for accents etc
+    --colour-accent     : #{$colour-accent};
+    --colour-accent-alt : #{$colour-accent-alt};
+
+    //define the main text and background colours with alternates
+    --colour-foreground     : #{$colour-lm-foreground};
+    --colour-foreground-alt : #{$colour-lm-foreground-alt};
+    --colour-background     : #{$colour-lm-background};
+    --colour-background-alt : #{$colour-lm-background-alt};
+
+    //change the colours for the dark mode
+    @media (prefers-color-scheme: dark) {
+        --colour-foreground     : #{$colour-dm-foreground};
+        --colour-foreground-alt : #{$colour-dm-foreground-alt};
+        --colour-background     : #{$colour-dm-background};
+        --colour-background-alt : #{$colour-dm-background-alt};
+    }
+
+    //
+    &.dark-theme {
+        --colour-foreground     : #{$colour-dm-foreground};
+        --colour-foreground-alt : #{$colour-dm-foreground-alt};
+        --colour-background     : #{$colour-dm-background};
+        --colour-background-alt : #{$colour-dm-background-alt};
+    }
+
 }
 
 //add a "skip to content" link for screen readers and keyboard warriors
 a[href="#main"] {
-    
+
     //
     @include absolute($top: 0.5em, $left: 12vh);
     position: absolute !important;
@@ -124,6 +150,42 @@ a[href="#main"] {
     &[data-icon="time"] {
         mask: url(/icons/time.svg) no-repeat center / contain;
         -webkit-mask: url(/icons/time.svg) no-repeat center / contain;
+    }
+
+}
+
+//
+.theme-toggle {
+
+    //just stick it in the top right corner
+    @include fixed($top: 3rem, $right: 3rem);
+
+    //
+    cursor: pointer;
+    opacity: 0.8;
+    line-height: 0;
+
+    //
+    &:hover, &:focus {
+        opacity: 1;
+    }
+
+    //
+    svg {
+        fill: var(--colour-foreground);
+    }
+
+    //
+    @at-root {
+
+        //add some transitions to the elements
+        .theme-toggle-outer { transform-origin: center center; transition: transform 750ms cubic-bezier(0.11, 0.14, 0.29, 1.32); }
+        .theme-toggle-inner { transition: transform 500ms ease-out; }
+
+        //when the theme is swapped, swap between a "sun" and "moon" motif and spin the outer element
+        .light-theme .theme-toggle-outer { transform: rotate(0.5turn); }
+        .light-theme .theme-toggle-inner { transform: translate(-10%, -5%); }
+
     }
 
 }

@@ -18,6 +18,13 @@
 
     <div class="site-wrapper">
 
+        <button class="theme-toggle" type="button" title="Switch theme">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 472.39 472.39" >
+                <g class="theme-toggle-outer"><path d="M403.21,167V69.18H305.38L236.2,0,167,69.18H69.18V167L0,236.2l69.18,69.18v97.83H167l69.18,69.18,69.18-69.18h97.83V305.38l69.18-69.18Zm-167,198.17a129,129,0,1,1,129-129A129,129,0,0,1,236.2,365.19Z" /></g>
+                <g class="theme-toggle-inner"><circle class="cls-1" cx="236.2" cy="236.2" r="103.78" /></g>
+            </svg>
+        </button>
+
         <header class="site-header">
             <p>eldarni.me</p>
             <nav>
@@ -48,6 +55,41 @@
             <a href="/about/" title="About">About</a>
         </nav>
     </footer>
+
+    <script>
+
+        //
+        const themeToggleButton = document.querySelector('button.theme-toggle');
+
+        //
+        const changeTheme = (colourScheme) => {
+
+            //
+            document.body.classList.toggle('dark-theme',  colourScheme === 'dark');
+            document.body.classList.toggle('light-theme', colourScheme === 'light');
+
+            //
+            localStorage.setItem('theme-preference', colourScheme);
+
+            //
+            themeToggleButton.setAttribute('title', `Switch to ${colourScheme} theme`);
+
+        }
+
+        //get the initial theme selection, localstorage will override os setting
+        const setThemePreference = () => {
+            changeTheme(((localStorage.getItem('theme-preference') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'));
+        }
+
+        //
+        themeToggleButton.addEventListener('click', () => {
+            changeTheme(((document.body.classList.contains('light-theme')) ? 'dark' : 'light'));
+        });
+
+        //
+        document.onload = setThemePreference();
+
+    </script>
 
 </body>
 </html>
