@@ -129,6 +129,9 @@ a[href="#main"] {
         //
         @include flex($align: center, $gap: 0.5rem);
 
+        //
+        margin-block-end: 1em;
+
     }
 
 }
