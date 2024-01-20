@@ -1,0 +1,59 @@
+
+//
+section.tags {
+
+    //
+    @include flex($direction: column, $gap: 1rem);
+    font-size: calc(var(--font-size-small) * 1.5);
+
+    //
+    a {
+
+        //
+        display: grid;
+        grid-template-columns: auto max-content;
+        grid-template-areas: "tag count";
+
+        //
+        align-items: end;
+
+        //
+        gap: 0.5em;
+
+        //
+        color: var(--colour-foreground);
+
+        //
+        &:hover {
+            color: $colour-accent;
+        }
+
+    }
+
+    //display the tag
+    h2 {
+
+        //
+        grid-area: tag;
+        position: relative;
+        overflow: hidden;
+        font-weight: normal;
+
+        //
+        @include after($content: repeat(' .', 180), $display: inline) {
+            padding-left: 0.25ch;
+            text-align: right;
+            white-space: normal;
+            color: var(--colour-foreground-alt);
+        }
+
+    }
+
+    //display the count
+    span {
+        grid-area: count;
+        font-family: var(--ff-heading);
+        height: 2.1em;
+    }
+
+}

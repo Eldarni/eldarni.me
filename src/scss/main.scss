@@ -5,6 +5,9 @@
 //reset
 @import 'partials/reset';
 
+//functions
+@import 'functions/repeat';
+
 //mixins
 @import 'mixins/flex';
 @import 'mixins/font';
@@ -19,6 +22,7 @@
 
 //layouts
 @import 'partials/article';
+@import 'partials/tags';
 @import 'partials/archive';
 
 //components

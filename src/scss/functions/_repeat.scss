@@ -1,0 +1,15 @@
+//repeat a string n times
+@function repeat($string, $times) {
+
+    //
+    $output: '';
+
+    //
+    @for $i from 1 through $times {
+        $output: $output + $string;
+    }
+
+    //
+    @return $output;
+
+}
