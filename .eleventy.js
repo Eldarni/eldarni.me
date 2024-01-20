@@ -51,6 +51,30 @@ module.exports = function(eleventyConfig) {
         return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
     });
 
+	//return all the tags used in a collection, and how many times they have been used
+	eleventyConfig.addFilter('getAllTags', (collection, filterTags = ['post']) => {
+
+        //
+		let tags = [];
+
+        //loop over the collection and pull out the tags for each item
+		for (let item of collection) {
+            tags = [ ...tags, ...(item.data.tags || [])];
+		}
+
+        //remove any tags that we want to exclude
+        const filteredTags = tags.filter((tag) => {
+            return !filterTags.includes(tag);
+        })
+        
+        //count how many times each tag appears
+        return filteredTags.reduce((a, c) => {
+            a[c] = ((a.hasOwnProperty(c)) ? a[c] + 1 : 1)
+            return a;
+        }, {});
+
+	});
+
     //
     eleventyConfig.addPlugin(syntaxHighlight);
 

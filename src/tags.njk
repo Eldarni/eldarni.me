@@ -1,0 +1,13 @@
+---
+layout: layout
+permalink: /tags/
+---
+<section class="archive">
+    <h1>Tags</h1>
+    {% for tag, count in collections.post|getAllTags %}
+        <a class="alt" href="/tags/{{ tag }}/" title="{{ tag }}">
+            <h2>{{ tag }}</h2>
+            <span>{{ count }}</time>
+        </a>
+    {% endfor %}
+</section>
