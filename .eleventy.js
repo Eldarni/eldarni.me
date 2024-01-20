@@ -94,8 +94,7 @@ module.exports = function(eleventyConfig) {
         const latestPost = posts.sort((a, b) => b.date - a.date).at(0);
 
         //to get the filename of the post's artifact = convert the "./src/" to "./public/" and ".njk" to "/index.html"
-        const latestPostArtifactFilename = latestPost.filename.replace('./src/', './public/').replace('.njk', '/index.html')
-        
+        const latestPostArtifactFilename = latestPost.filename.replaceAll('\\', '/').replace('src/', 'public/').replace('.njk', '/index.html')
         fs.copyFile(latestPostArtifactFilename, './public/index.html', (err) => {
             if (err) throw err;
             console.log(`[11ty] Cloned ${latestPostArtifactFilename} as './public/index.html'`);
