@@ -80,7 +80,7 @@
 
         //get the initial theme selection, localstorage will override os setting
         const setThemePreference = () => {
-            changeTheme(((localStorage.getItem('theme-preference') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'));
+            changeTheme(localStorage.getItem('theme-preference') || ((window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light') || 'light');
         }
 
         //

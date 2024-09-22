@@ -41,14 +41,6 @@ body {
     --colour-background     : #{$colour-lm-background};
     --colour-background-alt : #{$colour-lm-background-alt};
 
-    //change the colours for the dark mode
-    @media (prefers-color-scheme: dark) {
-        --colour-foreground     : #{$colour-dm-foreground};
-        --colour-foreground-alt : #{$colour-dm-foreground-alt};
-        --colour-background     : #{$colour-dm-background};
-        --colour-background-alt : #{$colour-dm-background-alt};
-    }
-
     //
     &.dark-theme {
         --colour-foreground     : #{$colour-dm-foreground};
