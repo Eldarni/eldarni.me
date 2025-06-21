@@ -1,0 +1,49 @@
+---
+title: It's a vibe bro
+subtitle: "Vibe Coding Part 1: My First App"
+tags:
+    - ai
+    - javascript
+date: 2025-06-21 11:22:00
+---
+
+<p>So I did it, I did the vibe coding thing, and it was, well - it was. So, what did I do? - I built <a href="https://fundo.dexxie.app/">this</a> - it's a simple app that tells people some useful information about Pokémon - geared mostly around raiding in Pokémon Go. But what it is isn't the point - what is important is how I did it.</p>
+
+<p>BLUF: It was better than I expected, but also not as good as I expected.</p>
+
+<p>First up - I am going to use the term "AI" in this post, when I do I am specifically talking about "Generative AI" - specifically LLMs.</p>
+
+<p>To set the scene, most people when talking to me about AI would call me AI-sceptic, but I'm not - I just don't trust it without having a proper process to observe what it generates - as it does and will make stuff up. I was at a small conference recently and one of the speakers put it perfectly "AI is a malicious intern". So many people come up with these great ideas to use it to generate custom content for end users wether that's for emails or webpage content or use it to summarise emails or meeting transcripts - or any other document - and it kinda worries me.</p>
+
+<p>Why does this worry me - AI can and will lie or hallucinate, it makes things up. it doesn't truly understand the context of what you are doing - its just guessing at what word to put next - based on patterns. Don't get me wrong - in the right application, with the right observations and controls - this is super cool and powerful.</p>
+
+<p>But I keep seeing people using it to summarise an email or article they have not read - any potentially have no background in the subject - therefore have no ability to see if it passes a smell test - the "AI overviews" on search results, Wikipedia's "AI Summery" are all examples of this, and while most of them are probably really good - some won't be - and if thats the one your relying on to be correct for the job interview or life decision - ouch.</p>
+
+<p>But - if you can observe it output - then it's all good right - maybe - lets dig into it.</p>
+
+<h2>The Process</h2>
+
+<p>So I used an editor called <a href="https://www.cursor.com/">Cursor</a> making use of it's agent mode. I have used Copilot before and other completion based approaches - but this was my first time jumping into using an agent to write everything.</p>
+
+<p>I started by getting it to setup a simple build env to make life easier - it was really insistent on using react - so took a couple tries to get the right prompt just to install just parcel. But after that it was relatively plain sailing.</p>
+
+<p>One part that really impressed me is when I gave it a formulae to calculate a specific value - this formulae has a modifier value that changes depending on the level of the Pokémon - just by calling out that this part of the formulae is this thing, the agent had enough context to find the other values and build up an array to allow me to do the calculation for different levels. Handling relatively niche language and concepts is not something that I expected.</p>
+
+<p>Things I didn't find useful is the constant regressions when adding or changing functionality - this seemed to be worse when getting it to do minor colour changes, it would just delete entire sections of the UI. I also tried to get it to add i18n localisation but it kept insisting on adding a functions from the react version.</p>
+
+<p>It handled cosmetic stuff really well - at least for broad stroke changes - it did feel harder to finesse small changes - it feels like there is a useful point to drop into the code and make changes "the old fashioned way".</p>
+
+<h2>Conclusion</h2>
+
+<p>What did I learn - agent based coding is a useful tool - with a few buts. These are - watch what it does - review what it changes when you ask it to do something. I used to get younger devs asking about adding code from places like stack overflow - I think my response that I used then is still good now - yes - but only if you understand what the code is doing. I had to tweak the code by hand a few times, or tweak my prompts to fix stuff - having the background knowledge to spot this and keeping an eye on it helped here. It definitely helps to kow how to do the job in order to ask the right prompts - I would like one day to get one of my non-programmer friends to try to build something - i think that would be super interesting.</p>
+
+<p>If you're interested here is the full <a href="https://github.com/Eldarni/fundo/blob/main/agent.md">agent chat log</a> to build the app.</p>
+
+<p>Hopefully i'll write up part 2 which will be a bit of a code review of the app - I fully expect to not like most of the code, and I don't imagine for a second that it's a maintainable code base - i guess that's another experiment for the future - trying this on a larger established codebase.</p>
+
+
+
+
+
+
+
